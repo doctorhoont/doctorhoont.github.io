@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-head">
+    <p class="post-kind">{% if page.kind == 'diary' %}병원 일기{% else %}진료실 정보{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  {%- if page.summary %}
+  <p class="summary"><strong>한 줄 요약</strong>{{ page.summary }}</p>
+  {%- endif %}
+
+  {%- if page.faq %}
+  <section class="faq">
+    <h2>자주 묻는 질문</h2>
+    {%- for item in page.faq %}
+    <h3>Q. {{ item.q }}</h3>
+    <p>{{ item.a }}</p>
+    {%- endfor %}
+  </section>
+  {%- endif %}
+
+  <p class="post-origin">처음 쓴 날 <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %-m월 %-d일" }}</time>{% if page.threads_url %} · <a href="{{ page.threads_url }}" rel="noopener">쓰레드 원문</a>{% endif %}</p>
+
+  {% include author.html %}
+
+  <nav class="post-nav" aria-label="이전 글과 다음 글">
+    <span>{% if page.previous %}<a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% endif %}</span>
+    <span>{% if page.next %}<a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}</span>
+  </nav>
+</article>

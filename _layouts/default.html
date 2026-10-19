@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- if page.summary -%}
+    {%- assign desc = page.summary -%}
+  {%- elsif page.description -%}
+    {%- assign desc = page.description -%}
+  {%- elsif page.excerpt -%}
+    {%- assign desc = page.excerpt | strip_html | normalize_whitespace | truncate: 140 -%}
+  {%- else -%}
+    {%- assign desc = site.description -%}
+  {%- endif -%}
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} · 신장내과 의사의 진료실 기록{% endif %}</title>
+  <meta name="description" content="{{ desc | strip | escape }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ desc | strip | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  {%- if page.layout == 'post' %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:author" content="{{ site.author.name }}">
+  {%- endif %}
+  <meta name="theme-color" content="#fbfaf7">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% include jsonld.html %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/favicon.svg' | relative_url }}" alt="" width="22" height="22">{{ site.title }}</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>글</a>
+        <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>소개</a>
+        <a href="{{ '/links/' | relative_url }}"{% if page.url == '/links/' %} aria-current="page"{% endif %}>링크</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+      <p>이 사이트의 글은 일반적인 건강 정보이며, 개인의 진단이나 치료를 대신하지 않습니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

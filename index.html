@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<section class="intro">
+  <p class="intro-name">{{ site.author.name }}</p>
+  <p class="intro-job">{{ site.author.job }}</p>
+  <p class="intro-bio">{{ site.author.bio }}<br>{{ site.tagline }}.</p>
+</section>
+
+<ul class="post-list">
+  {%- for post in site.posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}">
+      <span class="pl-meta"><span class="pl-kind">{% if post.kind == 'diary' %}병원 일기{% else %}진료실 정보{% endif %}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time></span>
+      <span class="pl-title">{{ post.title }}</span>
+      <span class="pl-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 90 }}</span>
+    </a>
+  </li>
+  {%- endfor %}
+</ul>

@@ -1,0 +1,44 @@
+title: 닥터훈트
+tagline: 웃고, 당황하고, 고민하는 신장내과 의사의 진료실 기록
+description: 웃고, 당황하고, 고민하는 신장내과 의사의 진료실 기록.
+url: https://doctorhoont.github.io
+baseurl: ""
+lang: ko
+locale: ko_KR
+timezone: Asia/Seoul
+
+author:
+  name: 닥터훈트
+  job: 내과 전문의 · 신장내과 의사
+  bio: 적어도 제 앞에 앉은 사람만큼은 한 번 더 살펴보고, 한 번 더 생각하려 합니다.
+  knows_about: [신장내과, 만성콩팥병, 투석, 내과]
+  links:
+    threads: https://www.threads.com/@doctor_hoont
+    naver: https://blog.naver.com/tanua
+
+permalink: /posts/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
